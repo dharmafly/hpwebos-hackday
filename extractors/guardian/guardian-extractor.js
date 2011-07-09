@@ -1,5 +1,6 @@
 var request = require("request"),
     fs = require("fs"),
+    _ = require("underscore"),
     Step = require("step"),
     section = "travel",
     params = {
@@ -13,7 +14,7 @@ var request = require("request"),
     },
     apiEndpoint = "http://content.guardianapis.com/search",
     borroughListFile = 'borrough-list.json',
-    resultSet = {},
+    resultSet = [],
     borroughList;
 
 
@@ -112,10 +113,28 @@ function saveIfAllDone () {
 
 
 function storeResults (borroughName, results) {
-  if (! resultSet[borroughName]) {
-    resultSet[borroughName] = [];
-  }
 
+  var borroughData = _.detect(resultSet, function (entry) {
+        return entry.name === borroughName;
+      }),
+      onsCode = _.detect(borroughList, function (item) {
+        if (item.name === borroughName) {
+          return item.ons_code;
+        }
+      }).ons_code;
+
+
+  console.info(onsCode);
+
+
+  if (!borroughData) {
+    borroughData = {
+      name: borroughName,
+      ons_code: onsCode,
+      results: []
+    };
+    resultSet.push(borroughData);
+  }
 
   results.forEach(function (entry) {
     var record = {};
@@ -144,7 +163,7 @@ function storeResults (borroughName, results) {
       }
     });
 
-    resultSet[borroughName].push(record);
+    borroughData.results.push(record);
   });
 }
 
