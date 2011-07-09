@@ -135,28 +135,34 @@ function storeResults (borroughName, results) {
   }
 
   results.forEach(function (entry) {
-    var record = {};
+    var record = {},
+        uniqueAssets = {};
 
     record.type = "guardian-article";
     record.title = entry.webTitle;
     record.url = entry.webUrl;
-    record.description = entry.fields.trailText;
+    record.description = entry.fields.traileText;
     record.lat = entry.fields.latitude;
     record.lng = entry.fields.longitude;
     record.imageUrl = entry.fields.thumbnail;
 
     if (entry.mediaAssets) {
-      record.attachments = entry.mediaAssets.map(function (asset) {
+
+      _.each(entry.mediaAssets, function (asset) {
+        uniqueAssets[asset.fields.caption] = asset.file;
+      });
+
+      record.attachments = _.map(uniqueAssets, function (assetFile, assetCaption) {
         return {
           type: "picture",
-          url: asset.file,
-          caption: asset.fields.caption
+          url: assetFile,
+          caption: assetCaption
         };
       });
     }
 
     record.tags = entry.tags.map(function (tag) {
-      if (["Turism", "London"].indexOf(tag.webTitle) === -1) {
+      if (["Turism", "London", ""].indexOf(tag.webTitle) === -1) {
         return tag.webTitle;
       }
     });
