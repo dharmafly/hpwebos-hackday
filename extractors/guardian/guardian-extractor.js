@@ -8,6 +8,7 @@ var request = require("request"),
       format: "json",
       section: "travel",
       "show-tags":"all",
+      "order-by": "relevance",
       "show-media":"picture",
       "show-fields":"all",
       "page-size": 50
@@ -139,7 +140,7 @@ function storeResults (borroughName, results) {
     record.type = "guardian-article";
     record.title = entry.webTitle;
     record.url = entry.webUrl;
-    record.description = entry.fields.trailerText;
+    record.description = entry.fields.trailText;
     record.lat = entry.fields.latitude;
     record.lng = entry.fields.longitude;
     record.imageUrl = entry.fields.thumbnail;
