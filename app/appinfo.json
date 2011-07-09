@@ -1,0 +1,10 @@
+{
+  "id": "com.github.dharmafly.hpweboshackday",
+  "version": "1.0.0",
+  "vendor": "The Crew",
+  "type": "web",
+  "main": "index.html",
+  "title": "Journeyman",
+  "icon": "icon.png",
+  "uiRevision": "2"
+}
