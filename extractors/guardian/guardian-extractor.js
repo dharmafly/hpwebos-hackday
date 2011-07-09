@@ -117,15 +117,10 @@ function storeResults (borroughName, results) {
   }
 
 
-  if (/^Kingston/.test( borroughName)) {
-    console.info(results);
-  }
-
-
-
   results.forEach(function (entry) {
     var record = {};
 
+    record.type = "guardian-article";
     record.title = entry.webTitle;
     record.url = entry.webUrl;
     record.description = entry.fields.trailerText;
@@ -136,11 +131,13 @@ function storeResults (borroughName, results) {
     if (entry.mediaAssets) {
       record.attachments = entry.mediaAssets.map(function (asset) {
         return {
+          type: "picture",
           url: asset.file,
           caption: asset.fields.caption
         };
       });
     }
+
     record.tags = entry.tags.map(function (tag) {
       if (["Turism", "London"].indexOf(tag.webTitle) === -1) {
         return tag.webTitle;
@@ -153,8 +150,13 @@ function storeResults (borroughName, results) {
 
 /*
 *
+* Issues a query on the Guardian API and fetching all the available results.
 *
+* borroughListEntry - A single entry  in the borrough-list.json record set.
+* goAhead           - Continuation function (automatically passed in by Step()).
+* page              - Offset in the search result pagination.
 *
+* Returns nothing.
 *
 */
 
