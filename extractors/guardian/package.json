@@ -1,0 +1,14 @@
+{ "name" : "extractors"
+, "description" : "Data extractors for Rewired State's webos hackday"
+, "tags" : ["http", "simple", "util", "utility"]
+, "version" : "0.0.1"
+, "author" : "Andrea Fiore <andrea.giulio.fiore@googlemail.com>"
+, "dependencies": {
+    "underscore": "= 1.1.6",
+    "step": "= 0.0.4",
+    "request": ">= 1.9.5"
+  }
+, "devDependencies": {}
+, "engines" : ["node >= 0.3.6"]
+, "main" : "./main"
+}
