@@ -124,9 +124,6 @@ function storeResults (borroughName, results) {
       }).ons_code;
 
 
-  console.info(onsCode);
-
-
   if (!borroughData) {
     borroughData = {
       name: borroughName,
