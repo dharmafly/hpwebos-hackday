@@ -5,6 +5,7 @@ a:link, a:visited {
 
 .articles-container {
   padding:0 2em;
+  position:relative;
 }
 
 .article-images, figure, img {
@@ -47,4 +48,14 @@ article:first-child h1 {
 article.wikipeida {
     background:url('/images/wikipedia_icon.png') no-repeat -25px -25px;
     border:1px solid #CCC;
+}
+
+.box_title {
+    position:absolute;
+    top:0;
+    right:0;
+    background:#555;
+    color:white;
+    opacity:0.5;
+    padding:0.2em;
 }

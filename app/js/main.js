@@ -45,7 +45,7 @@
   
   function renderWindow(compass, data){
     var articles = data.results,
-        html = Mustache.to_html(articlesTemplate, {articles: articles}),
+        html = Mustache.to_html(articlesTemplate, {articles: articles, box_title: data.box_title}),
         container = getElementByCompass(compass).html(html);
     
     layoutNewspaper(container);

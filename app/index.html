@@ -11,6 +11,7 @@
     <div id=scroller>
         <div class=windows>
             <section class=content>
+                
                 <div class=articles-container></div>
             </section>
         </div>
@@ -18,7 +19,9 @@
 	
 	<!-- TEMPLATES -->
 	<script type=text/html class=articles>
+	    <h2 class="box_title">{{ box_title }}</h2>
 		<section class=articles>
+            
 		{{#articles}}
 
 		<article class={{ type }}>
