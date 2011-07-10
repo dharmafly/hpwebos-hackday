@@ -50,17 +50,11 @@
         var offset = elem.offset();
         window.scroll(offset.left, offset.top);
     }
-
-    function initInternalScroller(){
-        content.append("<div id=internalscroller></div>");
-    }
     
     function init() {
 	    setTimeout(function () {
 		    window.s = myScroll = new iScroll("scroller", {hideScrollbar:true, snap: "section", bounce:false});
 		    myScroll.scrollToElement(content[0], 0);
-		    
-		    initInternalScroller();
 		    body.style.visibility = "visible";
 	    }, 100);
     }

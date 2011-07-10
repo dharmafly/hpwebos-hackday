@@ -21,15 +21,3 @@ div.windows > section.content {
 div.windows > section.adjacent {
     background-color:rgba(200,200,200,0.7);
 }
-
-/* --- */
-
-#internalscroller {
-    width:100px;
-    outline:1px solid red;
-    height:100%;
-    position:absolute;
-    top:0;
-    right:0;
-    z-index:9999;
-}
