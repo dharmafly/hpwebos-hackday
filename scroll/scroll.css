@@ -1,0 +1,22 @@
+body {
+    margin:0;
+    padding:0;
+}
+
+#scroller, div.windows {
+    position:absolute;
+    
+}
+
+div.windows section {
+    position:absolute;
+    outline:1px solid #333;
+}
+
+div.windows section.content {
+    background-color:rgba(200,255,200,0.7);
+}
+
+div.windows section.adjacent {
+    background-color:rgba(200,200,200,0.7);
+}
