@@ -12,7 +12,7 @@
     /////
 
     function constructAdjacents(content){
-        var adjacentHtml = "<section class=adjacent></section>",
+        var adjacentHtml = "<section class=adjacent><div class=articles-container></div></section>",
             adjacentBlock = _.map(_.range(4), function(){
                 return adjacentHtml;
             }).join("");

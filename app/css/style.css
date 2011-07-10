@@ -3,7 +3,7 @@ a:link, a:visited {
 	color: #000;
 }
 
-#articles-container {
+.articles-container {
   padding:0 2em;
 }
 

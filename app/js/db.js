@@ -4,7 +4,7 @@ function createFakeDb(){
       neighbours: {},
       _cache: {}, //json file name => data
 
-      currentDataset: "loc_-0.2179_51.6838.json",
+      currentDataset: "loc_-0.4393_51.5731",
 
       fetchDataset: function (dataset, callback) {
         if (arguments.length === 1) {
@@ -14,7 +14,7 @@ function createFakeDb(){
 
         var db = this,
             datasetFile = dataset ? dataset : db.currentDataset,
-            url = this.neighbourBaseurl + "/" + datasetFile;
+            url = this.neighbourBaseurl + "/" + datasetFile + ".json";
 
         jQuery.getJSON(url, function (data) {
           //update neighbourFiles hash
@@ -33,7 +33,17 @@ function createFakeDb(){
           return db._cache.dataSetFile;
         }
 
-        fetchDataset(dataSetFile, callback);
+        this.fetchDataset(dataSetFile, callback);
+      },
+      
+      getAllNeighbourData: function(callback){
+        var db = this;
+      
+        _.each(this.neighbours, function(data, compass){
+          db.getNeighbourData(compass, function(data){
+            callback(compass, data);
+          });
+        });
       }
     };
 }
