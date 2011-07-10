@@ -1,4 +1,1 @@
-enyo.depends(
-	"app.js",
-	"app.css"
-);
+// enyo.depends();

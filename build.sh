@@ -1,4 +1,4 @@
-palm-package scroll
+palm-package app
 palm-install com.github.dharmafly.hpweboshackday_1.0.0_all.ipk
 palm-launch com.github.dharmafly.hpweboshackday              
 

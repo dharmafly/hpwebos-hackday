@@ -1,48 +1,71 @@
-var fakeDb = {
-  _store: [],
+var width = window.innerWidth,
+    columns = 3,
+    gutter = 10,
+    db = createFakeDb();
 
-  borroughList: function () {
-    return _.pluck(this._store, "name");
-  },
+function createFakeDb(){
+  return {
+      _store: [],
 
-  getByBorrough: function (borrough) {
-    return _.detect(this._store, function (record, index) {
-      return record.name === borrough;
-    }).results;
-  }
-};
+      boroughList: function () {
+        return _.pluck(this._store, "name");
+      },
 
-function main () {
+      getByBorough: function (borough) {
+        return _.detect(this._store, function (record, index) {
+          return record.name === borough;
+        }).results;
+      }
+    };
+}
 
-  var borrough = document.location.hash.replace(/\#/,''),
-      results = fakeDb.getByBorrough('Westminster'),
+function loadDb(callback){
+  jQuery.getJSON("extractors/guardian/data/guardian-travel.json", callback);
+}
+
+function onImagesLoaded(container, callback){
+  var img = container.find("img"),
+      imgToLoad = img.length,
+      loaded = 0;
+      
+  img.bind("load error", function(){
+    loaded ++;
+    if (loaded === imgToLoad){
+      callback(container);
+    }
+  });
+}
+
+function initNewpaper(container){
+  container.masonry({
+    itemSelector:"article",
+    gutterWidth: gutter,
+    columnWidth: 300
+  });
+}
+
+// Initialise webOS
+function initPalm(){
+    if (window.PalmSystem) {
+        window.PalmSystem.stageReady();
+    }
+}
+
+function init() {
+  var borough = document.location.hash.replace(/\#/,''),
+      results = db.getByBorough('Hackney'),
       template = $(".guardian-articles").html(),
-      html = Mustache.to_html(template, {articles: results});
-
-
-  var container = $("#guardian-articles-container")
-    .html(html);
-
-  window.setTimeout(function(){  
-    container.masonry({
-      itemSelector:"article",
-      gutterWidth: 50,
-      columnWidth: 250
-    });
-  }, 250);
-
+      html = Mustache.to_html(template, {articles: results}),
+      container = $("#guardian-articles-container").html(html);
+  
+  onImagesLoaded(container, initNewpaper);
+  initNewpaper(container);
 }
 
 
+initPalm();
 
-jQuery(function loadDb ($) {
-  $.ajax("/extractors/guardian/data/guardian-travel.json",  {
-    dataType: "json",
-    type: "get",
-    success: function (data) {
-      fakeDb._store = data;
-      main();
-    }
-  });
+loadDb(function (data) {
+  db._store = data;
+  init();
 });
-
