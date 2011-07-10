@@ -147,9 +147,6 @@ function storeResults (borroughName, results) {
     record.imageUrl = entry.fields.thumbnail;
 
 
-    if (record.description == "undefined") {
-      record.description = false;
-    }
 
     if (entry.mediaAssets) {
 
@@ -161,7 +158,8 @@ function storeResults (borroughName, results) {
         return {
           type: "picture",
           url: assetFile,
-          caption: assetCaption
+          caption: assetCaption === "undefined" ?
+            false : assetCaption
         };
       });
     }
