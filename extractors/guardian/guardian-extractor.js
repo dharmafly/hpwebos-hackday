@@ -141,10 +141,15 @@ function storeResults (borroughName, results) {
     record.type = "guardian-article";
     record.title = entry.webTitle;
     record.url = entry.webUrl;
-    record.description = entry.fields.traileText;
+    record.description = entry.fields.trailText;
     record.lat = entry.fields.latitude;
     record.lng = entry.fields.longitude;
     record.imageUrl = entry.fields.thumbnail;
+
+
+    if (record.description == "undefined") {
+      record.description = false;
+    }
 
     if (entry.mediaAssets) {
 
