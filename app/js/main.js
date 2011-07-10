@@ -3,24 +3,8 @@ var width = window.innerWidth,
     gutter = 10,
     db = createFakeDb();
 
-function createFakeDb(){
-  return {
-      _store: [],
-
-      boroughList: function () {
-        return _.pluck(this._store, "name");
-      },
-
-      getByBorough: function (borough) {
-        return _.detect(this._store, function (record, index) {
-          return record.name === borough;
-        }).results;
-      }
-    };
-}
-
 function loadDb(callback){
-  jQuery.getJSON("extractors/guardian/data/guardian-travel.json", callback);
+  db.fetchDataset(callback);
 }
 
 function onImagesLoaded(container, callback){
@@ -51,9 +35,8 @@ function initPalm(){
     }
 }
 
-function init() {
+function init(results) {
   var borough = document.location.hash.replace(/\#/,''),
-      results = db.getByBorough('Hackney'),
       template = $(".guardian-articles").html(),
       html = Mustache.to_html(template, {articles: results}),
       container = $("#guardian-articles-container").html(html);
@@ -66,6 +49,5 @@ function init() {
 initPalm();
 
 loadDb(function (data) {
-  db._store = data;
-  init();
+  init(data.results);
 });
