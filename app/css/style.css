@@ -43,3 +43,8 @@ article:first-child {
 article:first-child h1 {
 
 }
+
+article.wikipeida {
+    background:url('/images/wikipedia_icon.png') no-repeat -25px -25px;
+    border:1px solid #CCC;
+}
