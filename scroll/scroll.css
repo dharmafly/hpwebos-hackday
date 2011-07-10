@@ -1,21 +1,14 @@
-html, body, div.windows {
-    width: 100%;
-    height:100%;
-}
-
 body {
     margin:0;
     padding:0;
-    overflow:scroll;
 }
 
-div.windows {
-    position:relative;
+#scroller, div.windows {
+    position:absolute;
+    
 }
 
 div.windows section {
-    width: 100%;
-    min-height: 100%;
     position:absolute;
     outline:1px solid #333;
 }

@@ -1,4 +1,10 @@
-var $window = jQuery(window);
+var $window = jQuery(window),
+    body = document.body,
+    $body = jQuery(body),
+    width = window.innerWidth,
+    height = window.innerHeight;
+
+/////
 
 function constructAdjacents(content){
     var adjacentHtml = "<section class=adjacent>foo</section>",
@@ -18,42 +24,56 @@ function constructAdjacents(content){
             /* rows */
             style.top = i < 3 ?
                 0 : i < 6 ?
-                "100%" :
-                "200%";
+                height + "px" :
+                height * 2 + "px";
             
             /* columns */  
             style.left = (i + 3) % 3 === 0 ?
                 0 : (i + 2) % 3 === 0 ?
-                "100%" :
-                "200%";
+                width + "px" :
+                width * 2 + "px";
+                
+            style.width = width + "px";
+            style.height = height + "px";
         });
+        
+    content.parent()
+        .width(width * 3)
+        .height(height * 3);
 }
 
 function scrollToElem(elem){
     var offset = elem.offset();
-    window.scrollTo(offset.left, offset.top);
+    window.scroll(offset.left, offset.top);
+}
+
+// Initialise iScroll
+function initIScroll(){
+	return new iScroll("scroller", {hideScrollbar:true, snap: "section", bounce:false});
+}
+
+// Initialise webOS
+function initPalm(){
+    if (window.PalmSystem) {
+        window.PalmSystem.stageReady();
+    }
 }
 
 /////
 
-var content = jQuery("section.content");
+var content = jQuery("section.content"),
+    myScroll;
+    
+body.style.visibility = "hidden";
 constructAdjacents(content);
 
-// Wait for paint
-var t = 0,
-    interval = 100,
-    intervalRef = window.setInterval(function(){
-        if (t && window.pageXOffset){
-            window.clearInterval(intervalRef);
-            return;
-        }
-        
-        scrollToElem(content);
-        t += interval;
-    }, interval);
+function init() {
+	setTimeout(function () {
+		myScroll = initIScroll();
+		myScroll.scrollToElement(content[0], 0);
+		body.style.visibility = "visible";
+		initPalm();
+	}, 100);
+}
 
-jQuery(function(){
-    if (window.PalmSystem) {
-        window.PalmSystem.stageReady();
-    }
-});
+jQuery(init);
