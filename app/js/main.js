@@ -1,8 +1,10 @@
 var width = window.innerWidth,
     columns = 3,
     gutter = 10,
-    
-    fakeDb = {
+    db = createFakeDb();
+
+function createFakeDb(){
+  return {
       _store: [],
 
       boroughList: function () {
@@ -15,6 +17,11 @@ var width = window.innerWidth,
         }).results;
       }
     };
+}
+
+function loadDb(callback){
+  jQuery.getJSON("extractors/guardian/data/guardian-travel.json", callback);
+}
 
 function onImagesLoaded(container, callback){
   var img = container.find("img"),
@@ -46,7 +53,7 @@ function initPalm(){
 
 function init() {
   var borough = document.location.hash.replace(/\#/,''),
-      results = fakeDb.getByBorough('Hackney'),
+      results = db.getByBorough('Hackney'),
       template = $(".guardian-articles").html(),
       html = Mustache.to_html(template, {articles: results}),
       container = $("#guardian-articles-container").html(html);
@@ -58,13 +65,7 @@ function init() {
 
 initPalm();
 
-jQuery(function loadDb ($) {
-  $.ajax("extractors/guardian/data/guardian-travel.json",  {
-    dataType: "json",
-    type: "get",
-    success: function (data) {
-      fakeDb._store = data;
-      init();
-    }
-  });
+loadDb(function (data) {
+  db._store = data;
+  init();
 });
