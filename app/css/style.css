@@ -1,0 +1,42 @@
+.article-images, figure, img {
+  width: 100%;
+	margin:0;
+	padding:0;
+}
+
+article h1 {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+article .more {
+  font-size: 0.6em;
+	margin-left: 75%;
+}
+
+article {
+  width: 250px;
+	float: left;
+	margin: 2px;
+	overflow: auto;
+}
+
+
+article figure figcaption {
+  font-size: smaller;
+	color: grey;
+}
+
+article:first-child {
+  font-size: 1.6em;
+  width: 58%;
+}
+
+article:first-child h1 {
+
+}

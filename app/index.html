@@ -1,12 +1,46 @@
 <!doctype html>
 <html lang=en>
 <head>
-    <meta charset=utf-8>
+  <meta charset=utf-8>
+	<link rel=stylesheet href="css/typography.css">
+	<link rel=stylesheet href="css/style.css">
 	<title>HP webOS Hackday</title>
-	
-	<!-- enyo.js: run `ln -s /opt/PalmSDK/Current/share/refcode/framework/enyo enyo` in the project directory -->
-	<script src="../enyo/1.0/framework/enyo.js"></script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js"></script>
+
+
+	<script src="js/dependencies/mustache.js"></script>
+	<script src="js/dependencies/jquery.masonry.min.js"></script>
+	<script src="js/main.js"></script>
+	<script type=text/html class=guardian-articles>
+		<section class=articles>
+		{{#articles}}
+
+		<article>
+		  <header>
+			<h1><a href="{{url}}" title="{{title}}">{{title}}</a></h1>
+			{{{description}}}
+			<div class=article-images>
+				{{#attachments}}
+				<figure>
+				  <img src="{{url}}">
+					{{#caption}}
+				  <figcaption>
+				    <p>{{caption}}</p>
+					</figcaption>
+					{{/caption}}
+				</figure>
+				{{/attachments}}
+			</div>
+			</header>
+		</article>
+		{{/articles}}
+		</section>
+	</script>
+
 </head>
 <body>
+	<div id=guardian-articles-container></div>
 </body>
 </html>
