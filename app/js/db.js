@@ -7,12 +7,10 @@ function createFakeDb(){
       currentDataset: "loc_-0.2179_51.6838.json",
 
       fetchDataset: function (dataset, callback) {
-
         if (arguments.length === 1) {
           callback = dataset;
           dataset = null;
         }
-
 
         var db = this,
             datasetFile = dataset ? dataset : db.currentDataset,
@@ -27,7 +25,7 @@ function createFakeDb(){
         });
       },
 
-      getNeighbourData: function (coordinate, callback ) {
+      getNeighbourData: function (coordinate, callback) {
         var db = this,
             dataSetFile = this.neighbours[coordinate];
 
@@ -36,7 +34,6 @@ function createFakeDb(){
         }
 
         fetchDataset(dataSetFile, callback);
-
       }
     };
 }

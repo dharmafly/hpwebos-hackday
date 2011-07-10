@@ -3,19 +3,21 @@
 <head>
   <meta charset=utf-8>
 	<link rel=stylesheet href="css/typography.css">
+	<link rel=stylesheet href="css/scroll.css">
 	<link rel=stylesheet href="css/style.css">
 	<title>HP webOS Hackday</title>
-
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.6/underscore-min.js"></script>
-
-
-	<script src="js/dependencies/mustache.js"></script>
-	<script src="js/dependencies/jquery.masonry.min.js"></script>
-
-	<script src="js/db.js"></script>
-	<script src="js/main.js"></script>
-	<script type=text/html class=guardian-articles>
+</head>
+<body>
+    <div id=scroller>
+        <div class=windows>
+            <section class=content>
+                <div id=articles-container></div>
+            </section>
+        </div>
+    </div>
+	
+	<!-- TEMPLATES -->
+	<script type=text/html class=articles>
 		<section class=articles>
 		{{#articles}}
 
@@ -40,9 +42,23 @@
 		{{/articles}}
 		</section>
 	</script>
-
-</head>
-<body>
-	<div id=guardian-articles-container></div>
+    
+    <!-- SCRIPTS -->
+    <script src="js/dependencies/underscore.min.js"></script>
+    <script src="js/dependencies/jquery.min.js"></script>
+	<script src="js/dependencies/iscroll.js"></script>
+	<script src="js/dependencies/mustache.js"></script>
+	<script src="js/dependencies/jquery.masonry.min.js"></script>
+	
+	<script src="js/scrollwindow.js"></script>
+	<script src="js/db.js"></script>
+	<script src="js/main.js"></script>
+	
+	<script>
+	    // Initialise webOS
+        if (window.PalmSystem) {
+            window.PalmSystem.stageReady();
+        }
+	</script>
 </body>
 </html>
