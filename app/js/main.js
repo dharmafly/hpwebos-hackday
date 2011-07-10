@@ -31,10 +31,10 @@
     });
   }
 
-  function init(results) {
+  function init(articles) {
     var borough = document.location.hash.replace(/\#/,''),
         template = $(".articles").html(),
-        html = Mustache.to_html(template, {articles: results}),
+        html = Mustache.to_html(template, {articles: articles}),
         container = $("#articles-container").html(html);
     
     onImagesLoaded(container, initNewpaper);
