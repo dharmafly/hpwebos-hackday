@@ -5,7 +5,7 @@ var fakeDb = {
     return _.pluck(this._store, "name");
   },
 
-  getByborough: function (borough) {
+  getByBorough: function (borough) {
     return _.detect(this._store, function (record, index) {
       return record.name === borough;
     }).results;
@@ -14,7 +14,7 @@ var fakeDb = {
 
 function main () {
   var borough = document.location.hash.replace(/\#/,''),
-      results = fakeDb.getByborough('Westminster'),
+      results = fakeDb.getByBorough('Westminster'),
       template = $(".guardian-articles").html(),
       html = Mustache.to_html(template, {articles: results}),
       container = $("#guardian-articles-container").html(html),
@@ -27,7 +27,6 @@ function main () {
     if (loaded === imgToLoad){
       initNewpaper(container);
     }
-    console.log(loaded, imgToLoad);
   });
 }
 
