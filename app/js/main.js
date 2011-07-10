@@ -6,7 +6,7 @@
       gutter = 10,
       db = createFakeDb(),
       articlesTemplate = jQuery(".articles").html(),
-      contentSections = jQuery("#scroller > div.windows > section"),
+      contentSections = jQuery("#scroller > div.windows > section .articles-container"),
       compassDirections = {"nw":0, "n":1, "ne":2, "w":3, "x":4, "e":5, "sw":6, "s":7, "se":8};
   
   function loadDb(callback){
