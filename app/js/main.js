@@ -59,7 +59,7 @@
   function renderNextNeighbour(callback){
     var compass;
 
-    currentlyProcessing = currentlyProcessing ? currentlyProcessing + 1 : 0;
+    currentlyProcessing = _.isUndefined(currentlyProcessing) ? 0 : currentlyProcessing + 1;
     compass = compassKeys[currentlyProcessing];
     
     if (compass){
@@ -76,7 +76,6 @@
     // Centre location
     loadDb(function(data) {
       renderWindow("x", data);
-        //db.getAllNeighbourData(renderWindow);
     });
   }
 

@@ -1,7 +1,6 @@
 function createFakeDb(){
   return {
       neighbourBaseurl: "data/0",
-      neighbours: {},
       _cache: {}, //json file name => data
 
       currentDataset: "loc_-0.4393_51.5731",
@@ -11,15 +10,16 @@ function createFakeDb(){
           callback = dataset;
           dataset = null;
         }
-
+        
         var db = this,
             datasetFile = dataset ? dataset : db.currentDataset,
             url = this.neighbourBaseurl + "/" + datasetFile + ".json";
 
         jQuery.getJSON(url, function (data) {
           //update neighbourFiles hash
-          db.neighbours = data.neighbours;
-          db.currentDataset = data.neighbours.x;
+          if (!db.neighbours){
+            db.neighbours = data.neighbours;
+          }
           db._cache[datasetFile] = data.results;
           callback(data);
         });
@@ -36,6 +36,7 @@ function createFakeDb(){
         this.fetchDataset(dataSetFile, callback);
       },
       
+      /* WARNING: will blow up webOS - don't use */
       getAllNeighbourData: function(callback){
         var db = this;
       
