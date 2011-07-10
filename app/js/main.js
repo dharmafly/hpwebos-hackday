@@ -1,27 +1,25 @@
 var fakeDb = {
   _store: [],
 
-  borroughList: function () {
+  boroughList: function () {
     return _.pluck(this._store, "name");
   },
 
-  getByBorrough: function (borrough) {
+  getByborough: function (borough) {
     return _.detect(this._store, function (record, index) {
-      return record.name === borrough;
+      return record.name === borough;
     }).results;
   }
 };
 
 function main () {
-
-  var borrough = document.location.hash.replace(/\#/,''),
-      results = fakeDb.getByBorrough('Westminster'),
+  var borough = document.location.hash.replace(/\#/,''),
+      results = fakeDb.getByborough('Westminster'),
       template = $(".guardian-articles").html(),
       html = Mustache.to_html(template, {articles: results});
 
 
-  var container = $("#guardian-articles-container")
-    .html(html);
+  var container = $("#guardian-articles-container").html(html);
 
   window.setTimeout(function(){  
     container.masonry({
@@ -30,13 +28,19 @@ function main () {
       columnWidth: 250
     });
   }, 250);
+}
 
+// Initialise webOS
+function initPalm(){
+    if (window.PalmSystem) {
+        window.PalmSystem.stageReady();
+    }
 }
 
 
 
 jQuery(function loadDb ($) {
-  $.ajax("/extractors/guardian/data/guardian-travel.json",  {
+  $.ajax("extractors/guardian/data/guardian-travel.json",  {
     dataType: "json",
     type: "get",
     success: function (data) {
@@ -46,3 +50,4 @@ jQuery(function loadDb ($) {
   });
 });
 
+jQuery(initPalm);
