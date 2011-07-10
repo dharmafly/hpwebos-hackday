@@ -3,9 +3,10 @@ body {
     padding:0;
 }
 
-#scroller, div.windows {
+#scroller {
     position:absolute;
-    
+    height:100%;
+    width:100%;
 }
 
 div.windows section {

@@ -7,30 +7,22 @@
 </head>
 <body>
     
-    <div id=scroller style="position:absolute; z-index:1; top:0; bottom:0; width:100%;">
+    <div id=scroller>
         <div class=windows>
             <section class=content></section>
         </div>
     </div>
     
-    
-    <!--
-    <div id=scroller style="position:absolute; z-index:1; top:0; bottom:0; width:100%;">
-        <ol style="font-size:16em; margin-left:1.2em; position:absolute; z-index:1;">
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
-        </ol>
-    </div>
-    -->
-    
     <script src="underscore.min.js"></script>
     <script src="jquery.min.js"></script>
 	<script src="iscroll.js"></script>
 	<script src="scroll.js"></script>
+	
+	<script>
+	    // Initialise webOS
+        if (window.PalmSystem) {
+            window.PalmSystem.stageReady();
+        }
+	</script>
 </body>
 </html>

@@ -2,7 +2,9 @@ var $window = jQuery(window),
     body = document.body,
     $body = jQuery(body),
     width = window.innerWidth,
-    height = window.innerHeight;
+    height = window.innerHeight,
+    content = jQuery("section.content"),
+    myScroll;
 
 /////
 
@@ -52,28 +54,17 @@ function initIScroll(){
 	return new iScroll("scroller", {hideScrollbar:true, snap: "section", bounce:false});
 }
 
-// Initialise webOS
-function initPalm(){
-    if (window.PalmSystem) {
-        window.PalmSystem.stageReady();
-    }
-}
-
-/////
-
-var content = jQuery("section.content"),
-    myScroll;
-    
-body.style.visibility = "hidden";
-constructAdjacents(content);
-
 function init() {
 	setTimeout(function () {
 		myScroll = initIScroll();
 		myScroll.scrollToElement(content[0], 0);
 		body.style.visibility = "visible";
-		initPalm();
 	}, 100);
 }
 
+
+/////
+
+body.style.visibility = "hidden";
+constructAdjacents(content);
 jQuery(init);
