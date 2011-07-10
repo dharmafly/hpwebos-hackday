@@ -16,18 +16,27 @@ function main () {
   var borough = document.location.hash.replace(/\#/,''),
       results = fakeDb.getByborough('Westminster'),
       template = $(".guardian-articles").html(),
-      html = Mustache.to_html(template, {articles: results});
+      html = Mustache.to_html(template, {articles: results}),
+      container = $("#guardian-articles-container").html(html),
+      img = container.find("img"),
+      imgToLoad = img.length,
+      loaded = 0;
+      
+  img.bind("load error", function(){
+    loaded ++;
+    if (loaded === imgToLoad){
+      initNewpaper(container);
+    }
+    console.log(loaded, imgToLoad);
+  });
+}
 
-
-  var container = $("#guardian-articles-container").html(html);
-
-  window.setTimeout(function(){  
-    container.masonry({
-      itemSelector:"article",
-      gutterWidth: 50,
-      columnWidth: 250
-    });
-  }, 250);
+function initNewpaper(container){
+  container.masonry({
+    itemSelector:"article",
+    gutterWidth: 50,
+    columnWidth: 250
+  });
 }
 
 // Initialise webOS
