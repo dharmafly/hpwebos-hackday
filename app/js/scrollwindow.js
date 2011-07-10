@@ -7,6 +7,7 @@
         width = window.innerWidth,
         height = window.innerHeight,
         content = jQuery("section.content"),
+        allSections,
         myScroll;
 
     /////
@@ -44,6 +45,8 @@
         content.parent()
             .width(width * 3)
             .height(height * 3);
+            
+        allSections = jQuery("section.content, section.adjacent");
     }
 
     function scrollToElem(elem){
@@ -51,9 +54,31 @@
         window.scroll(offset.left, offset.top);
     }
     
+    function makeElementVisible(elem){
+        allSections.css("visibility", "hidden");
+        elem.css("visibility", "visible");
+    }
+    
     function init() {
 	    setTimeout(function () {
-		    window.s = myScroll = new iScroll("scroller", {hideScrollbar:true, snap: "section", bounce:false});
+		    window.myScroll = myScroll = new iScroll("scroller", {vScrollbar:false, hScrollbar:false, hideScrollbar:true, snap: "section", onScrollEnd:function(){
+		        var x = Math.abs(myScroll.x),
+		            y = Math.abs(myScroll.y),
+		            halfWidth = width / 2,
+		            halfHeight = height / 2;
+		        
+		        allSections.each(function(i, el){
+	                var elem = jQuery(el),
+	                    left = parseInt(elem.css("left"), 10),
+	                    top = parseInt(elem.css("top"), 10);
+	                    
+	                if (left - halfWidth < x && left + halfWidth > x && top - halfHeight < y && top + halfHeight > y){
+	                    makeElementVisible(elem);
+	                    return false;
+	                }
+	            });
+		        
+		    }});
 		    myScroll.scrollToElement(content[0], 0);
 		    body.style.visibility = "visible";
 	    }, 100);

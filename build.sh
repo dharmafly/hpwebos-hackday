@@ -5,4 +5,4 @@ palm-launch com.github.dharmafly.hpweboshackday
 # console.log -> terminal
 
 # novaterm
-# tail -f messages | egrep -o 'hpweboshackday:([^$]+)'
+# tail -f /var/log/messages | egrep -o 'hpweboshackday:([^$]+)'

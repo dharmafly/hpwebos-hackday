@@ -14,3 +14,7 @@ div.windows > section {
     outline:1px solid #ccc;
     overflow:hidden;
 }
+
+div.windows > section.adjacent {
+    visibility:hidden;
+}
