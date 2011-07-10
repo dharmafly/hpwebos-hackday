@@ -1,3 +1,12 @@
+a:link, a:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+#articles-container {
+  padding:0 2em;
+}
+
 .article-images, figure, img {
   width: 100%;
 	margin:0;
@@ -7,11 +16,6 @@
 article h1 {
   font-size: 1.8em;
   font-weight: bold;
-}
-
-a:link, a:visited {
-	text-decoration: none;
-	color: #000;
 }
 
 article .more {
@@ -25,7 +29,6 @@ article {
   margin: 2px 0;
   overflow: auto;
 }
-
 
 article figure figcaption {
   font-size: smaller;
