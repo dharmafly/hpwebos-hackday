@@ -1,2 +1,4 @@
+api/settings.py
+*.pyc
 com.github.dharmafly.*
 enyo
