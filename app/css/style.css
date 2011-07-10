@@ -20,10 +20,10 @@ article .more {
 }
 
 article {
-  width: 250px;
-	float: left;
-	margin: 2px;
-	overflow: auto;
+  width: 30%;
+  float: left;
+  margin: 2px 0;
+  overflow: auto;
 }
 
 

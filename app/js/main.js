@@ -1,31 +1,30 @@
-var fakeDb = {
-  _store: [],
+var width = window.innerWidth,
+    columns = 3,
+    gutter = 10,
+    
+    fakeDb = {
+      _store: [],
 
-  boroughList: function () {
-    return _.pluck(this._store, "name");
-  },
+      boroughList: function () {
+        return _.pluck(this._store, "name");
+      },
 
-  getByBorough: function (borough) {
-    return _.detect(this._store, function (record, index) {
-      return record.name === borough;
-    }).results;
-  }
-};
+      getByBorough: function (borough) {
+        return _.detect(this._store, function (record, index) {
+          return record.name === borough;
+        }).results;
+      }
+    };
 
-function main () {
-  var borough = document.location.hash.replace(/\#/,''),
-      results = fakeDb.getByBorough('Westminster'),
-      template = $(".guardian-articles").html(),
-      html = Mustache.to_html(template, {articles: results}),
-      container = $("#guardian-articles-container").html(html),
-      img = container.find("img"),
+function onImagesLoaded(container, callback){
+  var img = container.find("img"),
       imgToLoad = img.length,
       loaded = 0;
       
   img.bind("load error", function(){
     loaded ++;
     if (loaded === imgToLoad){
-      initNewpaper(container);
+      callback(container);
     }
   });
 }
@@ -33,8 +32,8 @@ function main () {
 function initNewpaper(container){
   container.masonry({
     itemSelector:"article",
-    gutterWidth: 50,
-    columnWidth: 250
+    gutterWidth: gutter,
+    columnWidth: 300
   });
 }
 
@@ -45,7 +44,19 @@ function initPalm(){
     }
 }
 
+function init() {
+  var borough = document.location.hash.replace(/\#/,''),
+      results = fakeDb.getByBorough('Hackney'),
+      template = $(".guardian-articles").html(),
+      html = Mustache.to_html(template, {articles: results}),
+      container = $("#guardian-articles-container").html(html);
+  
+  onImagesLoaded(container, initNewpaper);
+  initNewpaper(container);
+}
 
+
+initPalm();
 
 jQuery(function loadDb ($) {
   $.ajax("extractors/guardian/data/guardian-travel.json",  {
@@ -53,9 +64,7 @@ jQuery(function loadDb ($) {
     type: "get",
     success: function (data) {
       fakeDb._store = data;
-      main();
+      init();
     }
   });
 });
-
-jQuery(initPalm);
