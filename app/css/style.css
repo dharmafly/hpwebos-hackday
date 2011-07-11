@@ -1,3 +1,7 @@
+body {
+  cursor:move;
+}
+
 a:link, a:visited {
 	text-decoration: none;
 	color: #000;
@@ -47,7 +51,7 @@ article:first-child h1 {
 
 article.wikipeida {
     background:url('../images/wikipedia_icon.png') no-repeat -25px -25px;
-    border:1px solid #CCC;
+    border:1px solid #ccc;
 }
 
 .box_title {

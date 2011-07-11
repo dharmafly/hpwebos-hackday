@@ -55,13 +55,15 @@
     }
     
     function makeElementVisible(elem){
+        return; /* TODO */
+        
         allSections.css("visibility", "hidden");
         elem.css("visibility", "visible");
     }
     
     function init() {
 	    setTimeout(function () {
-		    window.myScroll = myScroll = new iScroll("scroller", {vScrollbar:false, hScrollbar:false, hideScrollbar:true, snap: "section", onScrollEnd:function(){
+		    window.myScroll = myScroll = new iScroll("scroller", {bounce:false, hideScrollbar:true, snap: "section", onScrollEnd:function(){
 		        var x = Math.abs(myScroll.x),
 		            y = Math.abs(myScroll.y),
 		            halfWidth = width / 2,

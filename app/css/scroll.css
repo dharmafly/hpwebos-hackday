@@ -11,10 +11,10 @@ body {
 
 div.windows > section {
     position:absolute;
-    outline:1px solid #ccc;
+    outline:1px solid #777;
     overflow:hidden;
 }
 
 div.windows > section.adjacent {
-    visibility:hidden;
+    /* visibility:hidden; */
 }
